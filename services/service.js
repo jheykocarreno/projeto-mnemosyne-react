@@ -12,7 +12,7 @@ export const createMemoria = async (memoria) => {
         headers:{
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(memoia),
+        body: JSON.stringify(memoria),
     });
     return response.json();
 }

@@ -1,6 +1,6 @@
 import { memo, useState } from "react"
-import Footer from "../../src/componentes/footer/footer"
-import Header from "../../src/componentes/header/header"
+import Footer from "../../src/componentes/footer/Footer"
+import Header from "../../src/componentes/header/Header"
 
 import '../criar-memoria/criar-memoria.css'
 import { createMemoria } from "../../services/service"
@@ -10,7 +10,7 @@ const CriarMemoria = () => {
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [imagens, setImagens] = useState([]);
-    const [alertaVisivel, setAlertaVisivel] = useState[false];
+    const [alertaVisivel, setAlertaVisivel] = useState(false);
 
     const adicionarImagem = (event) => {
         const arquivos = Array.from(event.target.files);
@@ -59,28 +59,28 @@ const CriarMemoria = () => {
                 <h1>Crie uma memória</h1>
 
                 <form className="formulario" onSubmit={Submit}>
-                    <label className="lbl-txt" for="titulo">Título</label>
+                    <label className="lbl-txt" htmlFor="titulo">Título</label>
                     <input type="text" id="titulo" placeholder="Insira o título aqui"
                     value={titulo}
                     onChange={(e) => setTitulo(e.target.value)}
                     />
 
-                    <label className="lbl-txt" for="descricao">Descrição</label>
+                    <label className="lbl-txt" htmlFor="descricao">Descrição</label>
                     <textarea id="descricao" placeholder="Insira a descrição aqui"
                     value={descricao}
                     onChange={(e) => setDescricao(e.target.value)}
                     ></textarea>
 
-                    <label className="lbl-txt" for="add-imagens">Imagens</label>
+                    <label className="lbl-txt" htmlFor="add-imagens">Imagens</label>
                     <input type="file" id="add-imagens" multiple accept="image/*"
                     onChange={adicionarImagem}
                     />
-                    <label for="add-imagens" className="add-images">+ Adicionar imagens</label>
+                    <label htmlFor="add-imagens" className="add-images">+ Adicionar imagens</label>
 
                     {imagens.length === 0 ? (
                         <p className="nenhum">Nenhuma imagem adicionada no momento.</p>
                     ) : (
-                        <div className='imd-container'>
+                        <div className='img-container'>
                             {imagens.map((imagem) => (
                                 <img src={imagem}/>
                             ))}
@@ -92,10 +92,15 @@ const CriarMemoria = () => {
                     <button type="submit" className="btn-criar">Criar memória!</button>
                 </form>
 
-                <div className="cx-alerta visible">
-                    <p><strong>Aviso!</strong></p>
-                    <p>É necessário adicionar ao menos uma imagem para criar uma memória.</p>
-                </div>
+                {
+                    alertaVisivel && (
+                    <div className="cx-alerta visible">
+                        <p><strong>Aviso!</strong></p>
+                        <p>É necessário adicionar ao menos uma imagem para criar uma memória.</p>
+                    </div>
+                    )
+                }
+
             </main>
 
             <Footer/>
